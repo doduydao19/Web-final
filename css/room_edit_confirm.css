@@ -52,12 +52,26 @@
 	text-align: center;
 }
 
-/*Css form submit*/
+/*Css form submit nut Sua lai*/
 .form_submit{
 	background-color: rgb(79, 129, 189); 
 	border-style:solid; 
 	padding: 10px 25px 10px 25px;	
 	border-color: rgb(56,93,138);
+	border-radius: 5px;
+	text-align: center;
+	color: rgb(255,255,255);
+	font-family: "Times New Roman", Times, serif;
+	font-size:15px;
+}
+
+/*Css form submit nut Sua*/
+.form_submit_1{
+	background-color: rgb(79, 129, 189); 
+	border-style:solid; 
+	padding: 10px 25px 10px 25px;	
+	border-color: rgb(56,93,138);
+	margin: 0px 0px 0px 40px;
 	border-radius: 5px;
 	text-align: center;
 	color: rgb(255,255,255);
@@ -86,3 +100,8 @@
 	font-size:15px;
 }
 
+img {
+	width: 100px;
+	height: 120px;
+	border: 2px solid rgb(56, 93, 138);
+}
