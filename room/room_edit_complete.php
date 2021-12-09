@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../css/room_regist_complete.css">
+	<link rel="stylesheet" href="../css/room_edit_complete.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Room regist complete</title>
 </head>

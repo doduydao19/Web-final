@@ -1,0 +1,16 @@
+/* Css center*/
+.form_center{
+	border-color: rgb(85,128,166);
+	height: 100%;
+	width: 100%; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+}
+
+/* Css for table*/
+.table_form{
+	border:  2px solid rgb(85,116,155);
+	border-spacing: 20px;
+	padding: 30px 20px 15px 20px;
+}
