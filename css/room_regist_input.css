@@ -1,0 +1,79 @@
+/* Css center*/
+.form_center{
+	border-color: rgb(85,128,166);
+	height: 100%;
+	width: 100%; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+}
+
+/* Css for table*/
+.table_form{
+	border:  2px solid rgb(85,116,155);
+	border-spacing: 20px;
+	padding: 30px 20px 15px 20px;
+}
+
+/*Css form td in table*/
+/*.form_td { 
+	display: inline-block;
+	border-width: solid;
+	border:  2px solid rgb(67,117,162);
+	background-color: rgb(113,153,210);
+	padding: 7px 7px 7px 7px;
+	color: rgb(255,255,255);
+	text-align: center;
+}*/
+
+/*Css input form*/
+.input_form{
+	border-style:solid; 
+	border-color: rgb(59,96,140);
+	padding:  8px 0px 8px 0px;
+}
+
+/*Css input form Mo ta chi tiet*/
+.input_form_1{
+	border-style:solid; 
+	border-color: rgb(59,96,140);
+	padding:  8px 100px 50px 0px;
+}
+
+/*Css selectbox*/
+.selectbox_color{
+	border: 2px solid rgb(59,96,140);
+	padding:  7px 135px 7px 0px;
+	font-family: "Times New Roman", Times, serif;
+	font-size:15px;
+	text-align: center;
+}
+
+/*Css form submit*/
+.form_submit{
+	background-color: rgb(79, 129, 189); 
+	border-style:solid; 
+	padding: 10px 25px 10px 25px;	
+	border-color: rgb(56,93,138);
+	border-radius: 5px;
+	text-align: center;
+	color: rgb(255,255,255);
+}
+
+/*css text*/
+.text_color {
+	text-align: left;
+	color: black;
+}
+
+/*css upload file*/
+.upload_color {
+	display: inline-block;
+	border-width: solid;
+	border:  2px solid rgb(59,96,140);
+	background-color: rgb(116,156,203);
+	padding: 7px 2px 7px 7px;
+	color: rgb(255,255,255);
+	text-align: center;
+}
+
