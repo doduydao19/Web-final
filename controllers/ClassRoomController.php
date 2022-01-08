@@ -19,33 +19,48 @@ class ClassRoomController extends Controller
     public function index()
     {
         $q =  isset($_GET['q']) ? $_GET['q'] : null;
+        
         $building =  isset($_GET['building']) ? $_GET['building'] : null;
 
         $filter = [];
 
-        if ($q) {
-            $filter["name"] = "%$q%";
-        }
-
-        if ($building) {
+        if ($building != null & $q == null) {
             $filter["building"] = $building;
+            $data = ClassRoom::where($filter)->orderBy("created_at DESC")->get();
         }
 
-        $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
+        if ($building == null & $q != null) {
+            $filter["name"] = $q;
+            $filter["description"] = $q;
+            
+            $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
+        }
+
+        if ($q != null & $building != null) {
+            $filter["building"] = $building;
+            $filter["name"] = $q;
+            $filter["description"] = $q;
+            $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
+            
+        }
+
+        if ($q == null & $building == null) {
+            $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
+        }
+
+
         $buildings = ClassRoom::get(["building"]);
-
-
         $this->setLayout('admin');
         return $this->render('admin/class_room/index', [
             "q" => $q,
             "building" => $building,
             "buildings" => $buildings,
             "data" => $data,
-            "title" => "Class room",
+            "title" => "Classroom",
             "breadcrumbs" => [
                 [
                     "link" => "/admin/class-room",
-                    "label" => "Class room"
+                    "label" => "Classroom"
                 ],
                 [
                     "link" => "#",
@@ -207,12 +222,12 @@ class ClassRoomController extends Controller
         );
     }
 
-public function complete(Request $request)
+    public function complete(Request $request)
     {
         echo $request->getBody();
         $id = $_GET['id'];
         
-        $classModel = new Teacher();
+        $classModel = new ClassRoom();
         $classModel->loadData($request->getBody());
         $classModel->id = $id;
         $now = new DateTime();
