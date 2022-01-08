@@ -48,7 +48,7 @@ abstract class DbModel extends Model
 
 
         foreach ($attributes as $attribute) {
-            $statement->bindValue(":$attribute", $this->{$attribute});
+            $statement->bindValue(":$attribute", trim($this->{$attribute}));
         }
         $statement->execute();
         return true;
@@ -66,7 +66,7 @@ abstract class DbModel extends Model
         $statement = self::prepare($sql);
         $data = [];
         foreach ($attributes as $attribute) {
-            $data[$attribute] = $this->{$attribute};
+            $data[$attribute] = trim($this->{$attribute});
         }
         $statement->execute($data);
         return true;
