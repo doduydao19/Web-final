@@ -81,6 +81,12 @@ $app->router->post('/admin/device/edit', [DeviceController::class, 'edit']);
 $app->router->post('/admin/device/edit_confirm', [DeviceController::class, 'edit_confirm']);
 $app->router->get('/admin/device/destroy', [DeviceController::class, 'destroy']);
 
+//kien
+$app->router->get('/admin/device/edit_confirm', [DeviceController::class, 'edit_confirmView']);
+$app->router->post('/admin/device/edit_confirm', [DeviceController::class, 'edit_confirm']);
+$app->router->get('/admin/device/complete', [DeviceController::class, 'completeView']);
+$app->router->post('/admin/device/complete', [DeviceController::class, 'complete']);
+
 
 // ADMIN DEVICE
 $app->router->get('/admin/transaction', [TransactionController::class, 'index']);

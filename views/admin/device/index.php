@@ -10,8 +10,16 @@ use app\core\Application;
     <div class="col-4 mx-auto">
         <div class="card-body">
             <form method="get" action="/admin/device">
+                
                 <div class="form-group row">
-                    <label class="col-3 col-lg-2 col-form-label text-right">Tòa nhà</label>
+                    <label class="col-3 col-lg-2 col-form-label text-right">Từ khóa</label>
+                    <div class="col-9 col-lg-10">
+                        <input value="<?= $q ?>" class="form-control form-control-sm" type="text" name="q">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3 col-lg-2 col-form-label text-right">Tình trạng</label>
                     <div class="col-9 col-lg-10">
                         <select class="form-control form-control-sm" name="status">
                             <option value="">Chọn trạng thái</option>
@@ -27,12 +35,7 @@ use app\core\Application;
                         </select>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-3 col-lg-2 col-form-label text-right">Từ khóa</label>
-                    <div class="col-9 col-lg-10">
-                        <input value="<?= $q ?>" class="form-control form-control-sm" type="text" name="q">
-                    </div>
-                </div>
+
                 <div class="text-center">
                     <button class="btn btn-primary">Tìm kiếm</button>
                 </div>
@@ -42,13 +45,13 @@ use app\core\Application;
 </div>
 <div class="row mb-3">
     <div class="col-12">
-        <label style="font-size:14px;font-weight: 500; color: #009688">Số phòng học tìm thấy: <?= count($data) ?></label>
+        <label style="font-size:14px;font-weight: 500; color: #009688">Số thiết bị tìm thấy: <?= count($data) ?></label>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12">
         <div class="card card-table">
-            <div class="card-header">Class room table
+            <div class="card-header">
                 <div class="tools dropdown">
                     </span><a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"><span class="icon mdi mdi-more-vert"></span></a>
                     <div class="dropdown-menu" role="menu">
@@ -61,7 +64,7 @@ use app\core\Application;
                     <thead>
                         <tr>
                             <th style="width:5%;">No</th>
-                            <th style="width:30%;">Tên phòng học</th>
+                            <th style="width:30%;">Tên Thiết bị</th>
                             <th>Trạng thái</th>
                             <th style="width:30%;">Mô tả chi tiết</th>
                             <th colspan="2" class="actions">Action</th>
@@ -73,10 +76,12 @@ use app\core\Application;
                             <tr>
                                 <td><label> <?= $i; ?> </label></td>
                                 <td><label> <?= $item->name; ?> </label></td>
-                                <td><label> <?= "ok"; ?> </label></td>
+                                <td><label> <?= "Đang rảnh"; ?> </label></td>
                                 <td><label> <?= $item->description; ?> </label></td>
                                 <td style="width:60px" class="actions">
-                                    <a class="btn btn-danger btn-sm" href="/admin/device/destroy?id=<?= $item->id ?>">Xóa</a>
+                                    <a class="btn btn-danger btn-sm" href="/admin/device/destroy?id=<?= $item->id ?>"onclick="return confirm('Bạn chắc chắn muốn thiết bị <?=$item->name?>?')">Xóa</a>
+                                    <!-- <a class="btn btn-primary btn-sm" href="/admin/class-room/destroy?id=<?= $item->id ?>" onclick="return confirm('Bạn chắc chắn muốn xóa phòng học <?=$item->name?>?')">Xóa</a> -->
+                                    
                                 </td>
                                 <td style="width:60px" class="actions"><a class="btn btn-primary btn-sm" href="/admin/device/edit?id=<?= $item->id ?>">Sửa</a></td>
                             </tr>
@@ -92,3 +97,13 @@ use app\core\Application;
         </div>
     </div>
 </div>
+
+<!-- @script
+<script>
+    $(document).ready(function() {
+        $('delete-button').click(function() {
+            alert("Fuck u");
+        });
+    })
+</script>
+@endScript -->
