@@ -75,7 +75,8 @@ use app\core\Application;
                                 <td><label> <?= $item->specialized; ?> </label></td>
                                 <td><label> <?= $item->description; ?> </label></td>
                                 <td style="width:60px" class="actions">
-                                    <a class="btn btn-danger btn-sm" href="/admin/teacher/destroy?id=<?= $item->id ?>">Xóa</a>
+                                <a class="btn btn-primary btn-sm" href="/admin/teacher/destroy?id=<?= $item->id ?>" onclick="return confirm('Bạn chắc chắn muốn xóa phòng học <?=$item->name?>?')">Xóa</a>
+                                    <!-- <a class="btn btn-danger btn-sm" href="/admin/teacher/destroy?id=<?= $item->id ?>">Xóa</a> -->
                                 </td>
                                 <td style="width:60px" class="actions"><a class="btn btn-primary btn-sm" href="/admin/teacher/edit?id=<?= $item->id ?>">Sửa</a></td>
                             </tr>

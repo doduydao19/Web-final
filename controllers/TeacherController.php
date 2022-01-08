@@ -9,8 +9,11 @@ use app\core\Request;
 use app\models\Teacher;
 use DateTime;
 
+session_start();
+
 class TeacherController extends Controller 
 {
+   
     public function __construct()
     {
         
@@ -94,6 +97,8 @@ class TeacherController extends Controller
 
     public function editView()
     {
+        // echo "dao";
+        
         $id = $_GET['id'];
         $data = Teacher::findOne(["id" => $id]);
 
@@ -117,7 +122,33 @@ class TeacherController extends Controller
         );
     }
 
+
     public function edit(Request $request)
+    {
+        $specializeds = Teacher::get(["specialized"]);
+        echo '<pre>';
+        print_r($specializeds);
+        echo '</pre>';
+        exit();
+        
+        $id = $_GET['id'];
+        
+        $classModel = new Teacher();
+        $classModel->loadData($request->getBody());
+        $classModel->id = $id;
+        $now = new DateTime();
+        $classModel->updated_at = $now->format('Y-m-d H:i:s');
+        if ($classModel->validate() && $classModel->update()) {
+            // Application::$app->session->setFlash('msg', 'Update item success');
+            Application::$app->response->redirect("/admin/teacher/edit_confirm?id=$id");
+        } else {
+            Application::$app->session->setFlash('errors', $classModel->errors);
+            Application::$app->response->redirect("/admin/teacher/edit_confirm?id=$id");
+        }   
+    }
+
+
+    public function edit_confirm(Request $request)
     {
         $id = $_GET['id'];
         $classModel = new Teacher();
@@ -126,13 +157,90 @@ class TeacherController extends Controller
         $now = new DateTime();
         $classModel->updated_at = $now->format('Y-m-d H:i:s');
         if ($classModel->validate() && $classModel->update()) {
+            
             Application::$app->session->setFlash('msg', 'Update item success');
-            Application::$app->response->redirect("/admin/teacher/edit?id=$id");
+            Application::$app->response->redirect("/admin/teacher/edit_confirm?id=$id");
         } else {
             Application::$app->session->setFlash('errors', $classModel->errors);
-            Application::$app->response->redirect("/admin/teacher/edit?id=$id");
+            Application::$app->response->redirect("/admin/teacher/edit_confirm?id=$id");
         }
     }
+
+    public function edit_confirm_view()
+    {
+        
+        $id = $_GET['id'];
+        $data = Teacher::findOne(["id" => $id]);
+
+        $this->setLayout('admin');
+        return $this->render(
+            'admin/teacher/edit_confirm',
+            [
+                "data" => $data,
+                "title" => "Teacher",
+                "breadcrumbs" => [
+                    [
+                        "link" => "/admin/teacher",
+                        "label" => "Teacher"
+                    ],
+                    [
+                        "link" => "#",
+                        "label" => "create"
+                    ],
+                ]
+            ]
+        );
+    }
+
+
+    public function complete_view()
+    {
+
+        $id = $_GET['id'];
+        $data = Teacher::findOne(["id" => $id]);
+
+        $this->setLayout('admin');
+        return $this->render(
+            'admin/teacher/complete',
+            [
+                "data" => $data,
+                "title" => "Teacher",
+                "breadcrumbs" => [
+                    [
+                        "link" => "/admin/teacher",
+                        "label" => "Teacher"
+                    ],
+                    [
+                        "link" => "#",
+                        "label" => "create"
+                    ],
+                ]
+            ]
+        );
+    }
+
+public function complete(Request $request)
+    {
+        echo $request->getBody();
+        $id = $_GET['id'];
+        
+        $classModel = new Teacher();
+        $classModel->loadData($request->getBody());
+        $classModel->id = $id;
+        $now = new DateTime();
+        $classModel->updated_at = $now->format('Y-m-d H:i:s');
+        if ($classModel->validate()) {
+
+            // Application::$app->session->setFlash('msg', 'Update item success');
+            Application::$app->response->redirect("/admin/teacher/complete?id=$id");
+        } else {
+            Application::$app->session->setFlash('errors', $classModel->errors);
+            Application::$app->response->redirect("/admin/teacher/complete?id=$id");
+        }
+    
+        
+    }
+
 
     public function destroy(Request $request)
     {

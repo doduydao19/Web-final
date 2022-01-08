@@ -28,7 +28,7 @@ class Teacher extends DbModel
     {
         return [
             'name' => [self::RULE_REQUIRED],
-            'specialized' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 30]],
+            'specialized' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 1], [self::RULE_MAX, 'max' => 100]],
         ];
     }
 }

@@ -15,7 +15,7 @@ class Model
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
-                $this->{$key} = $value;
+                $this->{$key} = trim($value);
             }
         }
     }

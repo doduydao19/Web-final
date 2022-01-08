@@ -19,59 +19,55 @@ use app\core\Application;
                 <img id="image" style="max-width: 60px;" src="<?= $data->avatar ?>" />
                 <form id="uploadForm" action="/upload" method="post">
                     <label>Avatar:</label><br />
-                    <input name="file" type="file" class="inputFile" id="files" />
-                    <input type="submit" value="Upload" class="btnSubmit" />
+                    <input name="file" type="file" class="inputFile" id="files" disabled/>
+                    
                 </form>
 
-                <form action="/admin/teacher/edit?id=<?= $data->id ?>" method="POST">
+                <form action="/admin/teacher/edit_confirm?id=<?= $data->id ?>" method="POST">
                     <input value=<?= $data->avatar ?> class="form-control form-control-sm" type="hidden" name="avatar">
                     <div class="form-group row">
                         <label class="col-12 col-form-label mb-2">Họ và tên</label>
                         <div class="col-12 col-sm-8 col-lg-6">
-                            <input value="<?= $data->name ?>" class="form-control form-control-sm" type="text" name="name">
+                            <input value="<?= $data->name ?>" class="form-control form-control-sm" type="text" name="name"  disabled>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-12 col-form-label mb-2">Chuyên ngành</label>
                         <div class="col-12 col-sm-8 col-lg-6">
-                            <!-- <input value="<?= $data->specialized ?>" class="form-control form-control-sm" type="text" name="specialized">
-                         --> 
-                         <select class="form-control form-control-sm" name="specialized">
-                      
-                            <?php foreach ($specializeds as $value) : ?>
-                                <option value="<?= $value->specialized ?>" selected="selected"><?= $value->specialized ?></option>
-                            <?php endforeach; ?>
-                           
-                        </select>
+                            <input value="<?= $data->specialized ?>" class="form-control form-control-sm" type="text" name="specialized"  disabled>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-12 col-form-label mb-2">Học vị</label>
                         <div class="col-12 col-sm-8 col-lg-6">
-                            <input value="<?= $data->degree ?>" class="form-control form-control-sm" type="text" name="degree">
+                            <input value="<?= $data->degree ?>" class="form-control form-control-sm" type="text" name="degree"  disabled>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-12 col-form-label mb-2">Mô tả thêm</label>
                         <div class="col-12 col-sm-8 col-lg-6">
-                            <textarea class="form-control form-control-sm" type="text" name="description">
+                            <textarea class="form-control form-control-sm" type="text" name="description"  disabled>
                                 <?= $data->description ?>
                             </textarea>
                         </div>
                     </div>
 
                     <div class="form-group row"></div>
-                    <!-- <a class="actions" class="btn btn-primary btn-sm" href="/admin/teacher/edit_confirm?id=<?= $data->id ?>">Update</a> -->
-                    <input class="btn btn-primary" type="submit" name="confirm" value="Update">
+
+                    <!-- <button class="btn btn-primary" type="submit" value="Update"> -->
+                    <!-- <button class="btn btn-primary" onclick="/admin/teacher/edit?id=<?= $data->id ?>" type="submit" value="Fix"> -->
+                    
+                    <a class="btn btn-primary btn-sm" href="/admin/teacher/edit?id=<?= $data->id ?>">Sửa lại</a>
+                    <a class="btn btn-primary btn-sm" href="/admin/teacher/complete?id=<?= $data->id ?>">Đăng ký</a>
             </div>
             </form>
         </div>
     </div>
 </div>
-<!-- 
+
 @script
 <script src="/assets/lib/jquery.gritter/js/jquery.gritter.js" type="text/javascript"></script>
 <script>
@@ -118,4 +114,4 @@ use app\core\Application;
     });
     
 </script>
-@endScript -->
+@endScript
