@@ -44,7 +44,8 @@ use app\core\Application;
                     </div>
 
                     <div class="form-group row"></div>
-                    <input class="btn btn-primary" type="submit" value="Update">
+                    <!-- <input class="btn btn-primary" type="submit" value="Update"> -->
+                    <input type="button" class="btn btn-primary" value="Update" onclick="location.href='/admin/device/edit_confirm?id=<?= $data->id ?>';" />
             </div>
             </form>
         </div>

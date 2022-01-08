@@ -23,13 +23,14 @@ class DeviceController extends Controller
 
         $filter = [];
 
-        if ($q) {
+        if ($q != null) {
             $filter["name"] = "%$q%";
         }
 
-        if ($status) {
-            $filter["status"] = "%$status%";
-        }
+        // if ($status) {
+        //     $filter["status"] = $status;
+        // }
+
 
         $data = Device::whereLike($filter)->orderBy("created_at DESC")->get();
 
@@ -144,4 +145,73 @@ class DeviceController extends Controller
             Application::$app->response->redirect('/admin/device');
         }
     }
+
+
+    public function edit_confirmView()
+    {
+        $id = $_GET['id'];
+        $data = Device::findOne(["id" => $id]);
+
+        $this->setLayout('admin');
+        return $this->render('admin/device/edit_confirm', [
+            "data" => $data,
+            "title" => "Device",
+            "breadcrumbs" => [
+                [
+                    "link" => "/admin/device",
+                    "label" => "Device"
+                ],
+                [
+                    "link" => "#",
+                    "label" => "create"
+                ],
+            ]
+        ]);
+    }
+    public function completeView()
+    {
+        $id = $_GET['id'];
+        $data = Device::findOne(["id" => $id]);
+
+        $this->setLayout('admin');
+        return $this->render('admin/device/complete', [
+            "data" => $data,
+            "title" => "Device",
+            "breadcrumbs" => [
+                [
+                    "link" => "/admin/device",
+                    "label" => "Device"
+                ],
+                [
+                    "link" => "#",
+                    "label" => "create"
+                ],
+            ]
+        ]);
+    }
+
+    public function complete(Request $request)
+    {
+        $id = $_GET['id'];
+        $classModel = new Device();
+        $classModel->loadData($request->getBody());
+        $classModel->id = $id;
+        $now = new DateTime();
+        $classModel->updated_at = $now->format('Y-m-d H:i:s');
+        if ($classModel->validate() && $classModel->update()) {
+            Application::$app->session->setFlash('msg', 'Update item success');
+            Application::$app->response->redirect("/admin/device/complete?id=$id");
+        } else {
+            Application::$app->session->setFlash('errors', $classModel->errors);
+            Application::$app->response->redirect("/admin/device/complete?id=$id");
+        }
+    }
+
+   // phan cua kien
+   
+
+
+
+
+
 }
