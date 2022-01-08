@@ -28,7 +28,7 @@ class ClassRoom extends DbModel
     {
         return [
             'name' => [self::RULE_REQUIRED],
-            'building' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 1], [self::RULE_MAX, 'max' => 10]],
+            'building' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 3], [self::RULE_MAX, 'max' => 10]],
         ];
     }
 }

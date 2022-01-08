@@ -55,6 +55,10 @@ $app->router->get('/admin/class-room/create', [ClassRoomController::class, 'crea
 $app->router->post('/admin/class-room/create', [ClassRoomController::class, 'create']);
 $app->router->get('/admin/class-room/edit', [ClassRoomController::class, 'editView']);
 $app->router->post('/admin/class-room/edit', [ClassRoomController::class, 'edit']);
+$app->router->get('/admin/class-room/edit_confirm', [ClassRoomController::class, 'edit_confirm_view']);
+$app->router->post('/admin/class-room/edit_confirm', [ClassRoomController::class, 'edit_confirm']);
+$app->router->get('/admin/class-room/complete', [ClassRoomController::class, 'complete_view']);
+$app->router->post('/admin/class-room/complete', [ClassRoomController::class, 'complete']);
 $app->router->get('/admin/class-room/destroy', [ClassRoomController::class, 'destroy']);
 
 
@@ -80,12 +84,6 @@ $app->router->get('/admin/device/edit', [DeviceController::class, 'editView']);
 $app->router->post('/admin/device/edit', [DeviceController::class, 'edit']);
 $app->router->post('/admin/device/edit_confirm', [DeviceController::class, 'edit_confirm']);
 $app->router->get('/admin/device/destroy', [DeviceController::class, 'destroy']);
-
-//kien
-$app->router->get('/admin/device/edit_confirm', [DeviceController::class, 'edit_confirmView']);
-$app->router->post('/admin/device/edit_confirm', [DeviceController::class, 'edit_confirm']);
-$app->router->get('/admin/device/complete', [DeviceController::class, 'completeView']);
-$app->router->post('/admin/device/complete', [DeviceController::class, 'complete']);
 
 
 // ADMIN DEVICE

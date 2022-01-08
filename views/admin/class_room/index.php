@@ -23,12 +23,6 @@ use app\core\Application;
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
-                        
-                        
-                        <!-- <input value="<?= $building ?>" class="form-control form-control-sm" type="text" name="building"> -->
-                        
-
-
                     </div>
                 </div>
                 <div class="form-group row">
@@ -44,7 +38,6 @@ use app\core\Application;
         </div>
     </div>
 </div>
-
 <div class="row mb-3">
     <div class="col-12">
         <label style="font-size:14px;font-weight: 500; color: #009688">Số phòng học tìm thấy: <?= count($data) ?></label>
@@ -53,7 +46,7 @@ use app\core\Application;
 <div class="row">
     <div class="col-lg-12">
         <div class="card card-table">
-            <div class="card-header">Classroom table
+            <div class="card-header">Class room table
                 <div class="tools dropdown">
                     </span><a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"><span class="icon mdi mdi-more-vert"></span></a>
                     <div class="dropdown-menu" role="menu">
@@ -82,11 +75,9 @@ use app\core\Application;
                                 <td><label> <?= $item->building; ?> </label></td>
                                 <td><label> <?= $item->description; ?> </label></td>
                                 <td style="width:60px" class="actions">
-                                    <a  href="/admin/class-room/destroy?id=<?= $item->id ?>"onclick="return confirm('Bạn chắc chắn muốn xóa phòng học <?=$item->name?>?')"> 
-                                     <button class="btn btn-primary btn-sm">Xóa</button>
-                                     </a>
+                                    <a class="btn btn-danger btn-sm" href="/admin/class-room/destroy?id=<?= $item->id ?>">Xóa</a>
                                 </td>
-                                <td style="width:60px" class="actions"><a href="/admin/class-room/edit?id=<?= $item->id ?>"><button class="btn btn-primary btn-sm">Sửa</button></a></td>
+                                <td style="width:60px" class="actions"><a class="btn btn-primary btn-sm" href="/admin/class-room/edit?id=<?= $item->id ?>">Sửa</a></td>
                             </tr>
                             <?php $i++ ?>
                         <?php endforeach ?>

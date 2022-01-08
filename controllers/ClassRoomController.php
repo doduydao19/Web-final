@@ -19,48 +19,33 @@ class ClassRoomController extends Controller
     public function index()
     {
         $q =  isset($_GET['q']) ? $_GET['q'] : null;
-        
         $building =  isset($_GET['building']) ? $_GET['building'] : null;
 
         $filter = [];
 
-        if ($building != null & $q == null) {
+        if ($q) {
+            $filter["name"] = "%$q%";
+        }
+
+        if ($building) {
             $filter["building"] = $building;
-            $data = ClassRoom::where($filter)->orderBy("created_at DESC")->get();
         }
 
-        if ($building == null & $q != null) {
-            $filter["name"] = "%$q%";
-            $filter["description"] = "%$q%";
-            
-            $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
-        }
-
-        if ($q != null & $building != null) {
-            $filter["building"] = "%$building%";
-            $filter["name"] = "%$q%";
-            $filter["description"] = "%$q%";
-            $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
-            
-        }
-
-        if ($q == null & $building == null) {
-            $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
-        }
-
-
+        $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
         $buildings = ClassRoom::get(["building"]);
+
+
         $this->setLayout('admin');
         return $this->render('admin/class_room/index', [
             "q" => $q,
             "building" => $building,
             "buildings" => $buildings,
             "data" => $data,
-            "title" => "Classroom",
+            "title" => "Class room",
             "breadcrumbs" => [
                 [
                     "link" => "/admin/class-room",
-                    "label" => "Classroom"
+                    "label" => "Class room"
                 ],
                 [
                     "link" => "#",
@@ -78,11 +63,11 @@ class ClassRoomController extends Controller
             'admin/class_room/create',
 
             [
-                "title" => "Classroom",
+                "title" => "Class room",
                 "breadcrumbs" => [
                     [
                         "link" => "/admin/class-room",
-                        "label" => "Classroom"
+                        "label" => "Class room"
                     ],
                     [
                         "link" => "#",
@@ -110,7 +95,6 @@ class ClassRoomController extends Controller
         }
     }
 
-
     public function editView()
     {
         $id = $_GET['id'];
@@ -121,11 +105,11 @@ class ClassRoomController extends Controller
             'admin/class_room/edit',
             [
                 "data" => $data,
-                "title" => "Classroom",
+                "title" => "Class room",
                 "breadcrumbs" => [
                     [
                         "link" => "/admin/class-room",
-                        "label" => "Classroom"
+                        "label" => "Class room"
                     ],
                     [
                         "link" => "#",
@@ -145,12 +129,104 @@ class ClassRoomController extends Controller
         $now = new DateTime();
         $classModel->updated_at = $now->format('Y-m-d H:i:s');
         if ($classModel->validate() && $classModel->update()) {
-            Application::$app->session->setFlash('msg', 'Update item success');
-            Application::$app->response->redirect("/admin/class-room/edit?id=$id");
+            // Application::$app->session->setFlash('msg', 'Update item success');
+            Application::$app->response->redirect("/admin/class-room/edit_confirm?id=$id");
         } else {
             Application::$app->session->setFlash('errors', $classModel->errors);
-            Application::$app->response->redirect("/admin/class-room/edit?id=$id");
+            Application::$app->response->redirect("/admin/class-room/edit_confirm?id=$id");
         }
+    }
+
+    public function edit_confirm(Request $request)
+    {
+        $id = $_GET['id'];
+        $classModel = new ClassRoom();
+        $classModel->loadData($request->getBody());
+        $classModel->id = $id;
+        $now = new DateTime();
+        $classModel->updated_at = $now->format('Y-m-d H:i:s');
+        if ($classModel->validate() && $classModel->update()) {
+            
+            Application::$app->session->setFlash('msg', 'Update item success');
+            Application::$app->response->redirect("/admin/class-room/edit_confirm?id=$id");
+        } else {
+            Application::$app->session->setFlash('errors', $classModel->errors);
+            Application::$app->response->redirect("/admin/class-room/edit_confirm?id=$id");
+        }
+    }
+
+    public function edit_confirm_view()
+    {
+        
+        $id = $_GET['id'];
+        $data = ClassRoom::findOne(["id" => $id]);
+
+        $this->setLayout('admin');
+        return $this->render('admin/class_room/edit_confirm',
+            [
+                "data" => $data,
+                "title" => "Class room",
+                "breadcrumbs" => [
+                    [
+                        "link" => "/admin/class-room",
+                        "label" => "Class room"
+                    ],
+                    [
+                        "link" => "#",
+                        "label" => "create"
+                    ],
+                ]
+            ]
+        );
+    }
+
+
+    public function complete_view()
+    {
+
+        $id = $_GET['id'];
+        $data = ClassRoom::findOne(["id" => $id]);
+
+        $this->setLayout('admin');
+        return $this->render(
+            'admin/class_room/complete',
+            [
+                "data" => $data,
+                "title" => "Class room",
+                "breadcrumbs" => [
+                    [
+                        "link" => "/admin/class-room",
+                        "label" => "Class room"
+                    ],
+                    [
+                        "link" => "#",
+                        "label" => "create"
+                    ],
+                ]
+            ]
+        );
+    }
+
+public function complete(Request $request)
+    {
+        echo $request->getBody();
+        $id = $_GET['id'];
+        
+        $classModel = new Teacher();
+        $classModel->loadData($request->getBody());
+        $classModel->id = $id;
+        $now = new DateTime();
+        $classModel->updated_at = $now->format('Y-m-d H:i:s');
+        if ($classModel->validate()) {
+
+            // Application::$app->session->setFlash('msg', 'Update item success');
+            Application::$app->response->redirect("/admin/class-room/complete?id=$id");
+        } else {
+            Application::$app->session->setFlash('errors', $classModel->errors);
+            Application::$app->response->redirect("/admin/class-room/complete?id=$id");
+        }
+    
+        
     }
 
     public function destroy()
