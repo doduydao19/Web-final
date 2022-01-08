@@ -76,14 +76,17 @@ use app\core\Application;
                             <tr>
                                 <td><label> <?= $i; ?> </label></td>
                                 <td><label> <?= $item->name; ?> </label></td>
-                                <td><label> <?= "Đang rảnh"; ?> </label></td>
+                                <td><label> <?= $item->status === 0 ? 'Đang rảnh' : 'Đang mượn' ?> </label></td>
                                 <td><label> <?= $item->description; ?> </label></td>
                                 <td style="width:60px" class="actions">
-                                    <a class="btn btn-danger btn-sm" href="/admin/device/destroy?id=<?= $item->id ?>"onclick="return confirm('Bạn chắc chắn muốn thiết bị <?=$item->name?>?')">Xóa</a>
-                                    <!-- <a class="btn btn-primary btn-sm" href="/admin/class-room/destroy?id=<?= $item->id ?>" onclick="return confirm('Bạn chắc chắn muốn xóa phòng học <?=$item->name?>?')">Xóa</a> -->
-                                    
+                                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#mod-danger-<?= $item->id ?>" type="button">Xóa</a>
                                 </td>
                                 <td style="width:60px" class="actions"><a class="btn btn-primary btn-sm" href="/admin/device/edit?id=<?= $item->id ?>">Sửa</a></td>
+                                <td style="width:60px" class="actions">
+                                    <?php if ($item->status === 0) : ?>
+                                        <a class="btn btn-success btn-sm" href="/admin/transaction/create?device_id=<?= $item->id ?>">Mượn</a>
+                                    <?php endif ?>
+                                </td>
                             </tr>
                             <?php $i++ ?>
                         <?php endforeach ?>
@@ -97,6 +100,30 @@ use app\core\Application;
         </div>
     </div>
 </div>
+
+<?php foreach ($data as $item) : ?>
+    <div class="modal fade" id="mod-danger-<?= $item->id ?>" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="text-danger"><span class="modal-main-icon mdi mdi-close-circle-o"></span></div>
+                        <h3>Xóa</h3>
+                        <p>Bạn chắc chắn thực hiện hành động này ?</p>
+                        <div class="mt-8">
+                            <button class="btn btn-space btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                            <a href="/admin/device/destroy?id=<?= $item->id ?>" class="btn btn-space btn-danger">Đồng ý</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 <!-- @script
 <script>

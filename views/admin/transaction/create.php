@@ -30,7 +30,11 @@ use app\core\Application;
                         <div class="col-12 col-sm-8 col-lg-6">
                             <select class="select2 select2-sm" name="device_id">
                                 <?php foreach ($devices as $item) : ?>
-                                    <option value="<?= $item->id ?>"><?= $item->name ?></option>
+                                    <?php if ($item->id == $deviceId) : ?>
+                                        <option value="<?= $item->id ?>" selected="selected"><?= $item->name ?></option>
+                                    <?php else : ?>
+                                        <option value="<?= $item->id ?>"><?= $item->name ?></option>
+                                    <?php endif; ?>
                                 <?php endforeach ?>
                             </select>
                         </div>
