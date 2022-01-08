@@ -50,7 +50,7 @@ use app\core\Application;
                         <label class="col-12 col-form-label mb-2">Mô tả thêm</label>
                         <div class="col-12 col-sm-8 col-lg-6">
                             <textarea class="form-control form-control-sm" type="text" name="description"  disabled>
-                                <?= $data->description ?>
+                                <?= trim($data->description) ?>
                             </textarea>
                         </div>
                     </div>

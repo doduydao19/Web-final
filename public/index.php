@@ -59,12 +59,17 @@ $app->router->get('/admin/class-room/destroy', [ClassRoomController::class, 'des
 
 
 
+
 // ADMIN TEACHER
 $app->router->get('/admin/teacher', [TeacherController::class, 'index']);
 $app->router->get('/admin/teacher/create', [TeacherController::class, 'createView']);
 $app->router->post('/admin/teacher/create', [TeacherController::class, 'create']);
 $app->router->get('/admin/teacher/edit', [TeacherController::class, 'editView']);
 $app->router->post('/admin/teacher/edit', [TeacherController::class, 'edit']);
+$app->router->get('/admin/teacher/edit_confirm', [TeacherController::class, 'edit_confirm_view']);
+$app->router->post('/admin/teacher/edit_confirm', [TeacherController::class, 'edit_confirm']);
+$app->router->get('/admin/teacher/complete', [TeacherController::class, 'complete_view']);
+$app->router->post('/admin/teacher/complete', [TeacherController::class, 'complete']);
 $app->router->get('/admin/teacher/destroy', [TeacherController::class, 'destroy']);
 
 // ADMIN DEVICE
@@ -73,6 +78,7 @@ $app->router->get('/admin/device/create', [DeviceController::class, 'createView'
 $app->router->post('/admin/device/create', [DeviceController::class, 'create']);
 $app->router->get('/admin/device/edit', [DeviceController::class, 'editView']);
 $app->router->post('/admin/device/edit', [DeviceController::class, 'edit']);
+$app->router->post('/admin/device/edit_confirm', [DeviceController::class, 'edit_confirm']);
 $app->router->get('/admin/device/destroy', [DeviceController::class, 'destroy']);
 
 

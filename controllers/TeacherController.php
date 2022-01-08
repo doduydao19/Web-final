@@ -9,7 +9,6 @@ use app\core\Request;
 use app\models\Teacher;
 use DateTime;
 
-session_start();
 
 class TeacherController extends Controller 
 {
@@ -126,10 +125,10 @@ class TeacherController extends Controller
     public function edit(Request $request)
     {
         $specializeds = Teacher::get(["specialized"]);
-        echo '<pre>';
-        print_r($specializeds);
-        echo '</pre>';
-        exit();
+        // echo '<pre>';
+        // print_r($specializeds);
+        // echo '</pre>';
+        // exit();
         
         $id = $_GET['id'];
         
