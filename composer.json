@@ -1,0 +1,17 @@
+{
+    "name": "lexua/template-mvc",
+    "authors": [
+        {
+            "name": "huy4",
+            "email": "lexuanhuy4497@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
