@@ -82,9 +82,11 @@ use app\core\Application;
                                 <td><label> <?= $item->building; ?> </label></td>
                                 <td><label> <?= $item->description; ?> </label></td>
                                 <td style="width:60px" class="actions">
-                                    <a class="btn btn-primary btn-sm" href="/admin/class-room/destroy?id=<?= $item->id ?>" onclick="return confirm('Bạn chắc chắn muốn xóa phòng học <?=$item->name?>?')">Xóa</a>
+                                    <a  href="/admin/class-room/destroy?id=<?= $item->id ?>"onclick="return confirm('Bạn chắc chắn muốn xóa phòng học <?=$item->name?>?')"> 
+                                     <button class="btn btn-primary btn-sm">Xóa</button>
+                                     </a>
                                 </td>
-                                <td style="width:60px" class="actions"><a class="btn btn-primary btn-sm" href="/admin/class-room/edit?id=<?= $item->id ?>">Sửa</a></td>
+                                <td style="width:60px" class="actions"><a href="/admin/class-room/edit?id=<?= $item->id ?>"><button class="btn btn-primary btn-sm">Sửa</button></a></td>
                             </tr>
                             <?php $i++ ?>
                         <?php endforeach ?>

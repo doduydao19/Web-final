@@ -30,16 +30,16 @@ class ClassRoomController extends Controller
         }
 
         if ($building == null & $q != null) {
-            $filter["name"] = $q;
-            $filter["description"] = $q;
+            $filter["name"] = "%$q%";
+            $filter["description"] = "%$q%";
             
             $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
         }
 
         if ($q != null & $building != null) {
-            $filter["building"] = $building;
-            $filter["name"] = $q;
-            $filter["description"] = $q;
+            $filter["building"] = "%$building%";
+            $filter["name"] = "%$q%";
+            $filter["description"] = "%$q%";
             $data = ClassRoom::whereLike($filter)->orderBy("created_at DESC")->get();
             
         }
