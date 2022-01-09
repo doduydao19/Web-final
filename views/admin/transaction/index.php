@@ -27,7 +27,7 @@ use app\core\Application;
                                 <?php else : ?>
                                     <option value="<?= $value->name ?>"><?= $value->name ?></option>
                                 <?php endif; ?>
-                            <?php endforeach; ?> 
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -40,13 +40,13 @@ use app\core\Application;
 </div>
 <div class="row mb-3">
     <div class="col-12">
-        <label style="font-size:14px;font-weight: 500; color: #009688">Số phòng học tìm thấy: <?= count($data) ?></label>
+        <label style="font-size:14px;font-weight: 500; color: #009688">Số thiết bị tìm thấy: <?= count($data) ?></label>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12">
         <div class="card card-table">
-            <div class="card-header">Class room table
+            <div class="card-header">Transaction table
                 <div class="tools dropdown">
                     </span><a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"><span class="icon mdi mdi-more-vert"></span></a>
                     <div class="dropdown-menu" role="menu">
@@ -63,6 +63,7 @@ use app\core\Application;
                             <th>Thời gian dự kiến mượn</th>
                             <th>Thời điểm trả</th>
                             <th>Giảng viên mượn</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="no-border-x">
@@ -70,10 +71,13 @@ use app\core\Application;
                         <?php foreach ($data as $item) : ?>
                             <tr>
                                 <td><label> <?= $i; ?> </label></td>
-                                <td><label> <?= $i; ?> </label></td>
-                                <td><label> <?= $i; ?> </label></td>
-                                <td><label> <?= $i; ?> </label></td>
-                                <td><label> <?= $i; ?> </label></td>
+                                <td><label> <?= $item['deviceName']; ?> </label></td>
+                                <td><label> <?= date("d-m-Y", strtotime($item['start_transaction_plan'])) ?> </label></td>
+                                <td><label> <?= date("d-m-Y", strtotime($item['end_transaction_plan']))  ?> </label></td>
+                                <td><label> <?= $item['name']; ?> </label></td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm" href="/admin/transaction/edit?id=<?= $item['id'] ?>">Trả</a>
+                                </td>
                             </tr>
                             <?php $i++ ?>
                         <?php endforeach ?>
